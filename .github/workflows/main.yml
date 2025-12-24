@@ -25,15 +25,17 @@ jobs:
           # Memastikan semua dependensi yang dibutuhkan modelling.py terinstall
           pip install mlflow==2.19.0 scikit-learn pandas numpy
           
-      - name: Upload mlruns as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: model-artifacts
-          path: mlruns/
-          retention-days: 30
 
       - name: Run MLflow Project (Retraining)
         run: |
           # Menjalankan project dari root repository. 
           # Pastikan folder 'MLProject' berisi file 'MLProject' (tanpa ekstensi) dan 'modelling.py'
           mlflow run MLProject --env-manager local
+
+      - name: Upload mlruns as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-artifacts
+          path: mlruns/
+          retention-days: 30
+          
